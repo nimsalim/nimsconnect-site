@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NimsConnect — Cloud, IT &amp; Community Services</title>
+<meta name="description" content="Cloud, IT, and AI consulting for small businesses, nonprofits, and schools. Fixed-scope migrations, Microsoft 365 setup, and systems support. Bronx, NY.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E1526;
+    --slate:#1B2740;
+    --slate-2:#243352;
+    --fog:#8592AC;
+    --paper:#F5F3ED;
+    --signal:#F2A65A;
+    --circuit:#5EEAD4;
+    --line: rgba(245,243,237,0.10);
+    --radius: 10px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+  }
+  h1,h2,h3,.display{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  .mono{
+    font-family:'IBM Plex Mono',monospace;
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+  }
+
+  /* NAV */
+  header.site{
+    position:sticky; top:0; z-index:50;
+    background:rgba(14,21,38,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 24px;
+  }
+  .logo{
+    display:flex; align-items:baseline; gap:8px;
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700; font-size:19px;
+    text-decoration:none;
+  }
+  .logo .dot{color:var(--circuit);}
+  .nav-links{
+    display:flex; align-items:center; gap:28px;
+    list-style:none; margin:0; padding:0;
+  }
+  .nav-links a{
+    text-decoration:none;
+    font-size:14px;
+    color:var(--fog);
+    transition:color .15s ease;
+  }
+  .nav-links a:hover, .nav-links a:focus-visible{color:var(--paper);}
+  .lang-toggle{
+    display:flex; border:1px solid var(--line); border-radius:6px; overflow:hidden;
+    font-family:'IBM Plex Mono',monospace; font-size:12px;
+  }
+  .lang-toggle button{
+    background:transparent; color:var(--fog); border:none;
+    padding:6px 10px; cursor:pointer; transition:.15s ease;
+  }
+  .lang-toggle button.active{background:var(--slate-2); color:var(--circuit);}
+  .nav-cta{
+    display:none;
+  }
+  .mobile-toggle{
+    display:none;
+    background:none;border:1px solid var(--line);border-radius:6px;
+    color:var(--paper); padding:8px 10px; cursor:pointer;
+  }
+  @media (max-width:760px){
+    .nav-links{
+      position:fixed; top:64px; left:0; right:0;
+      flex-direction:column; align-items:flex-start; gap:0;
+      background:var(--ink); border-bottom:1px solid var(--line);
+      padding:8px 24px 20px;
+      transform:translateY(-8px); opacity:0; pointer-events:none;
+      transition:all .18s ease;
+    }
+    .nav-links.open{transform:translateY(0); opacity:1; pointer-events:auto;}
+    .nav-links li{width:100%; padding:12px 0; border-bottom:1px solid var(--line);}
+    .mobile-toggle{display:block;}
+  }
+
+  /* HERO */
+  .hero{
+    padding:88px 0 56px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      radial-gradient(600px 300px at 85% -10%, rgba(94,234,212,0.10), transparent 60%),
+      radial-gradient(500px 260px at 10% 0%, rgba(242,166,90,0.08), transparent 60%);
+    pointer-events:none;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--circuit);
+    display:flex; align-items:center; gap:8px;
+    margin-bottom:20px;
+  }
+  .eyebrow .pulse{
+    width:7px;height:7px;border-radius:50%;
+    background:var(--circuit);
+    box-shadow:0 0 0 0 rgba(94,234,212,0.5);
+    animation:pulse 2s infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(94,234,212,0.45);}
+    70%{box-shadow:0 0 0 8px rgba(94,234,212,0);}
+    100%{box-shadow:0 0 0 0 rgba(94,234,212,0);}
+  }
+  .hero h1{
+    font-size:clamp(34px, 5.4vw, 58px);
+    line-height:1.06;
+    max-width:15ch;
+  }
+  .hero h1 .accent{color:var(--signal);}
+  .hero p.lede{
+    margin-top:22px;
+    font-size:18px;
+    color:var(--fog);
+    max-width:52ch;
+  }
+  .hero-cta{
+    display:flex; flex-wrap:wrap; gap:14px;
+    margin-top:32px;
+  }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:13px 22px;
+    border-radius:8px;
+    font-size:15px; font-weight:600;
+    text-decoration:none;
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:transform .12s ease, background .15s ease, border-color .15s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{
+    background:var(--circuit); color:var(--ink);
+  }
+  .btn-primary:hover{background:#7ff2e5;}
+  .btn-ghost{
+    border-color:var(--line); color:var(--paper); background:transparent;
+  }
+  .btn-ghost:hover{border-color:var(--fog);}
+
+  /* STATUS BAR — signature element */
+  .status-panel{
+    margin-top:56px;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    background:var(--slate);
+    overflow:hidden;
+  }
+  .status-head{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:12px 18px;
+    border-bottom:1px solid var(--line);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px; color:var(--fog);
+  }
+  .status-head .dots{display:flex; gap:6px;}
+  .status-head .dots span{width:8px;height:8px;border-radius:50%; background:var(--line);}
+  .status-row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 18px;
+    border-bottom:1px solid var(--line);
+    font-size:14px;
+  }
+  .status-row:last-child{border-bottom:none;}
+  .status-row .label{display:flex; align-items:center; gap:10px;}
+  .status-row .label .idx{
+    font-family:'IBM Plex Mono',monospace; color:var(--fog); font-size:12px;
+  }
+  .status-tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    padding:4px 10px;
+    border-radius:20px;
+    display:flex; align-items:center; gap:6px;
+  }
+  .status-tag.online{color:var(--circuit); background:rgba(94,234,212,0.10);}
+  .status-tag.seasonal{color:var(--signal); background:rgba(242,166,90,0.10);}
+  .status-tag .sdot{width:6px;height:6px;border-radius:50%; background:currentColor;}
+
+  /* SECTION SHARED */
+  section{padding:88px 0;}
+  .section-head{
+    max-width:640px;
+    margin-bottom:48px;
+  }
+  .section-eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--fog); margin-bottom:12px; display:block;
+  }
+  .section-head h2{
+    font-size:clamp(26px,3.4vw,36px);
+  }
+  .section-head p{
+    color:var(--fog); font-size:16px; margin-top:14px;
+  }
+
+  /* SERVICES */
+  .services{
+    border-top:1px solid var(--line);
+  }
+  .service-grid{
+    display:grid;
+    grid-template-columns:1.3fr 1fr 1fr;
+    gap:20px;
+  }
+  @media (max-width:900px){
+    .service-grid{grid-template-columns:1fr;}
+  }
+  .service-grid-single{
+    display:grid;
+    grid-template-columns:1fr;
+  }
+  .card.wide{
+    padding:40px;
+  }
+  .card.wide .desc{
+    max-width:60ch;
+    font-size:16px;
+  }
+  .subservice-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:24px;
+    margin:8px 0 28px;
+    padding-top:24px;
+    border-top:1px solid var(--line);
+  }
+  @media (max-width:640px){
+    .subservice-grid{grid-template-columns:1fr;}
+  }
+  .subservice h4{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:16px; font-weight:600;
+    margin:0 0 6px;
+    color:var(--paper);
+    display:flex; align-items:center; gap:8px;
+  }
+  .subservice h4::before{
+    content:"";
+    width:6px; height:6px; border-radius:50%;
+    background:var(--circuit);
+    flex-shrink:0;
+  }
+  .subservice p{
+    font-size:13.5px; color:var(--fog); margin:0; padding-left:14px;
+  }
+  .card{
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:28px;
+    background:var(--slate);
+    display:flex; flex-direction:column;
+  }
+  .card.featured{
+    background:linear-gradient(155deg, var(--slate-2), var(--slate));
+    border-color:rgba(94,234,212,0.25);
+    grid-row: span 2;
+  }
+  .card .tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--circuit);
+    margin-bottom:14px;
+  }
+  .card.featured .tag{color:var(--circuit);}
+  .card:not(.featured) .tag{color:var(--signal);}
+  .card h3{
+    font-size:21px;
+    margin-bottom:12px;
+  }
+  .card p.desc{
+    color:var(--fog); font-size:14.5px; margin:0 0 18px;
+  }
+  .card ul{
+    list-style:none; margin:0 0 20px; padding:0;
+    font-size:14.5px;
+    color:var(--paper);
+    display:flex; flex-direction:column; gap:10px;
+  }
+  .card ul li{
+    display:flex; gap:10px; align-items:flex-start;
+  }
+  .card ul li::before{
+    content:"›";
+    color:var(--circuit);
+    font-family:'IBM Plex Mono',monospace;
+    flex-shrink:0;
+  }
+  .card:not(.featured) ul li::before{color:var(--signal);}
+  .card .card-cta{
+    margin-top:auto;
+    font-size:14px; font-weight:600;
+    text-decoration:none;
+    display:inline-flex; align-items:center; gap:6px;
+    color:var(--circuit);
+  }
+  .card:not(.featured) .card-cta{color:var(--signal);}
+
+  /* ABOUT */
+  .about{
+    border-top:1px solid var(--line);
+    background:var(--slate);
+  }
+  .about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:56px;
+    align-items:start;
+  }
+  @media (max-width:820px){
+    .about-grid{grid-template-columns:1fr;}
+  }
+  .about h2{font-size:clamp(24px,3vw,32px); max-width:16ch;}
+  .about p{color:var(--fog); font-size:16px; margin-top:18px;}
+  .credential-list{
+    list-style:none; margin:28px 0 0; padding:0;
+    display:flex; flex-direction:column; gap:0;
+  }
+  .credential-list li{
+    display:flex; justify-content:space-between; gap:16px;
+    padding:14px 0;
+    border-bottom:1px solid var(--line);
+    font-size:14.5px;
+  }
+  .credential-list li:first-child{border-top:1px solid var(--line);}
+  .credential-list .k{color:var(--paper); font-weight:500;}
+  .credential-list .v{
+    font-family:'IBM Plex Mono',monospace;
+    color:var(--fog); font-size:13px; text-align:right;
+  }
+  .lang-pills{
+    display:flex; flex-wrap:wrap; gap:8px; margin-top:24px;
+  }
+  .lang-pills span{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    border:1px solid var(--line);
+    padding:6px 12px; border-radius:20px;
+    color:var(--fog);
+  }
+
+  /* CONTACT / FOOTER */
+  .contact{
+    border-top:1px solid var(--line);
+    text-align:center;
+  }
+  .contact h2{font-size:clamp(28px,4vw,42px); max-width:18ch; margin:0 auto;}
+  .contact p{color:var(--fog); margin-top:16px; max-width:46ch; margin-left:auto; margin-right:auto;}
+  .contact .hero-cta{justify-content:center; margin-top:32px;}
+  footer{
+    border-top:1px solid var(--line);
+    padding:32px 0;
+  }
+  .footer-row{
+    display:flex; justify-content:space-between; align-items:center;
+    flex-wrap:wrap; gap:12px;
+    font-size:13px; color:var(--fog);
+  }
+  .footer-row a{text-decoration:none; color:var(--fog);}
+  .footer-row a:hover{color:var(--paper);}
+  .footer-links{display:flex; gap:20px;}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="nav wrap">
+    <a href="#top" class="logo"><span>Nims</span><span class="dot">Connect</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#services" data-en="Services" data-fr="Services">Services</a></li>
+      <li><a href="#about" data-en="About" data-fr="À propos">About</a></li>
+      <li><a href="#contact" data-en="Contact" data-fr="Contact">Contact</a></li>
+      <li style="border-bottom:none; padding-top:16px;">
+        <div class="lang-toggle" role="group" aria-label="Language">
+          <button type="button" class="active" data-lang="en" onclick="setLang('en')">EN</button>
+          <button type="button" data-lang="fr" onclick="setLang('fr')">FR</button>
+        </div>
+      </li>
+    </ul>
+    <div style="display:flex; align-items:center; gap:14px;">
+      <div class="lang-toggle" role="group" aria-label="Language" style="display:flex;">
+        <button type="button" class="active" data-lang="en" onclick="setLang('en')">EN</button>
+        <button type="button" data-lang="fr" onclick="setLang('fr')">FR</button>
+      </div>
+      <button class="mobile-toggle" aria-label="Toggle menu" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow"><span class="pulse"></span>
+        <span data-en="Bronx, NY · Multilingual · Enterprise-grade" data-fr="Bronx, NY · Multilingue · Niveau entreprise">Bronx, NY · Multilingual · Enterprise-grade</span>
+      </div>
+      <h1>
+        <span data-en="Cloud & IT systems built the way " data-fr="Des systèmes cloud et IT conçus comme ">Cloud &amp; IT systems built the way </span><span class="accent" data-en="enterprises build them." data-fr="les entreprises les construisent.">enterprises build them.</span>
+      </h1>
+      <p class="lede" data-en="NimsConnect brings enterprise-scale systems experience — Azure, AWS, Microsoft 365 — to small businesses, nonprofits, and schools across the Bronx. One point of contact, no jargon, fixed-scope pricing." data-fr="NimsConnect apporte une expérience de systèmes à l'échelle de l'entreprise — Azure, AWS, Microsoft 365 — aux petites entreprises, associations et écoles du Bronx. Un seul interlocuteur, sans jargon, à prix fixe.">
+        NimsConnect brings enterprise-scale systems experience — Azure, AWS, Microsoft 365 — to small businesses, nonprofits, and schools across the Bronx. One point of contact, no jargon, fixed-scope pricing.
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="https://wa.me/17185219369" target="_blank" rel="noopener">
+          <span data-en="Message on WhatsApp" data-fr="Message sur WhatsApp">Message on WhatsApp</span>
+        </a>
+        <a class="btn btn-ghost" href="#services" data-en="See services" data-fr="Voir les services">See services</a>
+      </div>
+
+      <!-- STATUS PANEL: signature element -->
+      <div class="status-panel">
+        <div class="status-head">
+          <span class="mono" data-en="nimsconnect / service-status" data-fr="nimsconnect / statut-des-services">nimsconnect / service-status</span>
+          <div class="dots"><span></span><span></span><span></span></div>
+        </div>
+        <div class="status-row">
+          <div class="label"><span class="idx">01</span><span data-en="Cloud &amp; Azure Migration" data-fr="Migration cloud &amp; Azure">Cloud &amp; Azure Migration</span></div>
+          <span class="status-tag online"><span class="sdot"></span><span data-en="Online" data-fr="En ligne">Online</span></span>
+        </div>
+        <div class="status-row">
+          <div class="label"><span class="idx">02</span><span data-en="Microsoft 365 Setup" data-fr="Configuration Microsoft 365">Microsoft 365 Setup</span></div>
+          <span class="status-tag online"><span class="sdot"></span><span data-en="Online" data-fr="En ligne">Online</span></span>
+        </div>
+        <div class="status-row">
+          <div class="label"><span class="idx">03</span><span data-en="AI &amp; Automation Readiness" data-fr="Préparation à l'IA et à l'automatisation">AI &amp; Automation Readiness</span></div>
+          <span class="status-tag online"><span class="sdot"></span><span data-en="Online" data-fr="En ligne">Online</span></span>
+        </div>
+        <div class="status-row">
+          <div class="label"><span class="idx">04</span><span data-en="Systems &amp; Device Management" data-fr="Gestion des systèmes et appareils">Systems &amp; Device Management</span></div>
+          <span class="status-tag online"><span class="sdot"></span><span data-en="Online" data-fr="En ligne">Online</span></span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-eyebrow" data-en="What we do" data-fr="Nos services">What we do</span>
+        <h2 data-en="One consultant, full-stack systems support." data-fr="Un seul consultant, un support systèmes complet.">One consultant, full-stack systems support.</h2>
+        <p data-en="Enterprise-grade cloud and IT work, scoped and priced for small teams." data-fr="Un travail cloud et IT de niveau entreprise, adapté et tarifé pour les petites équipes.">Enterprise-grade cloud and IT work, scoped and priced for small teams.</p>
+      </div>
+
+      <div class="service-grid-single">
+        <div class="card featured wide">
+          <span class="tag" data-en="Core Service" data-fr="Service principal">Core Service</span>
+          <h3 data-en="Cloud &amp; IT Consulting" data-fr="Conseil cloud &amp; IT">Cloud &amp; IT Consulting</h3>
+          <p class="desc" data-en="The same systems discipline used to run infrastructure for 4,000+ users across 17 schools — scoped for small teams and priced as fixed engagements, not open-ended hourly work." data-fr="La même rigueur système utilisée pour gérer l'infrastructure de plus de 4 000 utilisateurs dans 17 écoles — adaptée aux petites équipes et facturée en forfaits fixes, pas à l'heure sans limite.">The same systems discipline used to run infrastructure for 4,000+ users across 17 schools — scoped for small teams and priced as fixed engagements, not open-ended hourly work.</p>
+          <div class="subservice-grid">
+            <div class="subservice">
+              <h4 data-en="Cloud &amp; Azure Migration" data-fr="Migration cloud &amp; Azure">Cloud &amp; Azure Migration</h4>
+              <p data-en="Move to Azure or clean up an existing environment." data-fr="Migrer vers Azure ou assainir un environnement existant.">Move to Azure or clean up an existing environment.</p>
+            </div>
+            <div class="subservice">
+              <h4 data-en="Microsoft 365 Setup" data-fr="Configuration Microsoft 365">Microsoft 365 Setup</h4>
+              <p data-en="Deployment, identity, and mailbox/data migration." data-fr="Déploiement, identité et migration des boîtes mail/données.">Deployment, identity, and mailbox/data migration.</p>
+            </div>
+            <div class="subservice">
+              <h4 data-en="AI &amp; Automation Readiness" data-fr="Préparation à l'IA et à l'automatisation">AI &amp; Automation Readiness</h4>
+              <p data-en="Assess where AI tools actually save your team time." data-fr="Identifier où les outils d'IA font réellement gagner du temps à votre équipe.">Assess where AI tools actually save your team time.</p>
+            </div>
+            <div class="subservice">
+              <h4 data-en="SSO &amp; Device Management" data-fr="SSO &amp; gestion des appareils">SSO &amp; Device Management</h4>
+              <p data-en="Identity cleanup, single sign-on, and fleet management." data-fr="Nettoyage d'identité, authentification unique et gestion du parc.">Identity cleanup, single sign-on, and fleet management.</p>
+            </div>
+          </div>
+          <a class="card-cta" href="https://wa.me/17185219369" target="_blank" rel="noopener"><span data-en="Book a consult →" data-fr="Réserver une consultation →">Book a consult →</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="wrap about-grid">
+      <div>
+        <span class="section-eyebrow" data-en="Who's behind it" data-fr="Qui est derrière">Who's behind it</span>
+        <h2 data-en="Enterprise systems experience, community-scale trust." data-fr="Expérience systèmes d'entreprise, confiance à l'échelle communautaire.">Enterprise systems experience, community-scale trust.</h2>
+        <p data-en="Souleymane “Nims” Nimaga runs cloud infrastructure and EdTech systems for a 17-school network in New York — identity, Azure/M365 migrations, and compliance across 4,000+ users. NimsConnect exists because that same systems thinking should be available to the business down the block, not just large institutions." data-fr="Souleymane « Nims » Nimaga gère l'infrastructure cloud et les systèmes EdTech d'un réseau de 17 écoles à New York — identité, migrations Azure/M365 et conformité pour plus de 4 000 utilisateurs. NimsConnect existe parce que cette même rigueur systémique devrait être accessible aux commerces de quartier, pas seulement aux grandes institutions.">Souleymane “Nims” Nimaga runs cloud infrastructure and EdTech systems for a 17-school network in New York — identity, Azure/M365 migrations, and compliance across 4,000+ users. NimsConnect exists because that same systems thinking should be available to the business down the block, not just large institutions.</p>
+        <div class="lang-pills">
+          <span data-en="Client communication in English &amp; French" data-fr="Communication client en anglais et en français">Client communication in English &amp; French</span>
+        </div>
+      </div>
+      <div>
+        <ul class="credential-list">
+          <li><span class="k" data-en="AWS Certified Cloud Practitioner" data-fr="AWS Certified Cloud Practitioner">AWS Certified Cloud Practitioner</span><span class="v mono">2026–2029</span></li>
+          <li><span class="k" data-en="AWS Cloud Application Developer Program" data-fr="AWS Cloud Application Developer Program">AWS Cloud Application Developer Program</span><span class="v mono" data-en="AWS Cloud Institute" data-fr="AWS Cloud Institute">AWS Cloud Institute</span></li>
+          <li><span class="k" data-en="B.A. Economics" data-fr="Licence en économie">B.A. Economics</span><span class="v mono">Lehman College, CUNY</span></li>
+          <li><span class="k" data-en="B.B.A. Financial Management" data-fr="B.B.A. Gestion financière">B.B.A. Financial Management</span><span class="v mono">Bamako, Mali</span></li>
+          <li><span class="k" data-en="Systems supported" data-fr="Systèmes gérés">Systems supported</span><span class="v mono">4,000+ users / 17 sites</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <h2 data-en="Have something to fix, migrate, or figure out?" data-fr="Un problème à résoudre, une migration à faire ?">Have something to fix, migrate, or figure out?</h2>
+      <p data-en="Reach out directly — most conversations start on WhatsApp." data-fr="Contactez-nous directement — la plupart des échanges commencent sur WhatsApp.">Reach out directly — most conversations start on WhatsApp.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="https://wa.me/17185219369" target="_blank" rel="noopener">
+          <span data-en="Message on WhatsApp" data-fr="Message sur WhatsApp">Message on WhatsApp</span>
+        </a>
+        <a class="btn btn-ghost" href="mailto:nimagaslmn@gmail.com" data-en="Send an email" data-fr="Envoyer un e-mail">Send an email</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <span>© <span id="year"></span> NimsConnect · Bronx, NY</span>
+    <div class="footer-links">
+      <a href="tel:+17185219369" class="mono">(718) 521-9369</a>
+      <a href="mailto:nimagaslmn@gmail.com" class="mono">nimagaslmn@gmail.com</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  function setLang(lang){
+    document.querySelectorAll('[data-en]').forEach(function(el){
+      var text = el.getAttribute('data-' + lang);
+      if(text !== null){ el.textContent = text; }
+    });
+    document.querySelectorAll('.lang-toggle button').forEach(function(btn){
+      btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+    });
+    document.documentElement.setAttribute('lang', lang);
+  }
+
+  // close mobile nav on link click
+  document.querySelectorAll('#navLinks a').forEach(function(a){
+    a.addEventListener('click', function(){
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
+</script>
+
+</body>
+</html>
