@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NimsConnect — Cloud, IT &amp; Community Services</title>
 <meta name="description" content="Cloud, IT, and AI consulting for small businesses, nonprofits, and schools. Fixed-scope migrations, Microsoft 365 setup, and systems support. New York, NY.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 72'%3E%3Cline x1='36' y1='20' x2='20' y2='46' stroke='%235EEAD4' stroke-width='4'/%3E%3Cline x1='36' y1='20' x2='52' y2='46' stroke='%235EEAD4' stroke-width='4'/%3E%3Cline x1='20' y1='46' x2='52' y2='46' stroke='%235EEAD4' stroke-width='4'/%3E%3Ccircle cx='36' cy='20' r='9' fill='%23F2A65A'/%3E%3Ccircle cx='20' cy='46' r='9' fill='%235EEAD4'/%3E%3Ccircle cx='52' cy='46' r='9' fill='%235EEAD4'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -62,11 +63,12 @@
     padding:16px 24px;
   }
   .logo{
-    display:flex; align-items:baseline;
+    display:flex; align-items:center; gap:10px;
     font-family:'Space Grotesk',sans-serif;
     font-weight:700; font-size:19px;
     text-decoration:none;
   }
+  .logo .wordmark{display:flex; align-items:baseline; gap:0;}
   .logo .dot{color:var(--circuit);}
   .nav-links{
     display:flex; align-items:center; gap:28px;
@@ -408,17 +410,21 @@
 
 <header class="site">
   <div class="nav wrap">
-    <a href="#top" class="logo"><span>Nims</span><span class="dot">Connect</span></a>
+    <a href="#top" class="logo">
+      <svg width="26" height="26" viewBox="0 0 72 72" fill="none" aria-hidden="true" style="flex-shrink:0;">
+        <line x1="36" y1="20" x2="20" y2="46" stroke="#5EEAD4" stroke-width="3.5"/>
+        <line x1="36" y1="20" x2="52" y2="46" stroke="#5EEAD4" stroke-width="3.5"/>
+        <line x1="20" y1="46" x2="52" y2="46" stroke="#5EEAD4" stroke-width="3.5"/>
+        <circle cx="36" cy="20" r="8.5" fill="#F2A65A"/>
+        <circle cx="20" cy="46" r="8.5" fill="#5EEAD4"/>
+        <circle cx="52" cy="46" r="8.5" fill="#5EEAD4"/>
+      </svg>
+      <span class="wordmark"><span>Nims</span><span class="dot">Connect</span></span>
+    </a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#services" data-en="Services" data-fr="Services">Services</a></li>
       <li><a href="#about" data-en="About" data-fr="À propos">About</a></li>
       <li><a href="#contact" data-en="Contact" data-fr="Contact">Contact</a></li>
-      <li style="border-bottom:none; padding-top:16px;">
-        <div class="lang-toggle" role="group" aria-label="Language">
-          <button type="button" class="active" data-lang="en" onclick="setLang('en')">EN</button>
-          <button type="button" data-lang="fr" onclick="setLang('fr')">FR</button>
-        </div>
-      </li>
     </ul>
     <div style="display:flex; align-items:center; gap:14px;">
       <div class="lang-toggle" role="group" aria-label="Language" style="display:flex;">
